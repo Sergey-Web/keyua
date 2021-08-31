@@ -20,10 +20,18 @@ class Company
         'tester' => Tester::class,
     ];
 
+
+    /**
+     * @throws Exception
+     */
     public function getEmployee(string $position): EmployeeInterface
     {
         if (!array_key_exists($position, $this->employees)) {
-            throw new Exception('The company does not have such a position');
+            throw new Exception(
+                'The company does not have such a position.' . "\n"
+                . 'Here are positions in this company: '
+                . implode(',', array_keys($this->employees))
+            );
         }
 
         return new $this->employees[$position];

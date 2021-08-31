@@ -1,64 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## PHP
+Существует несколько видов работников: программист, дизайнер,
+тестировщик, менеджер.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1.Каждый работник умеет по-своему делать свою работу:
+- программист может: 1) писать код, 2) тестировать код, 3)
+  общаться с менеджером
+- дизайнер может: 4) рисовать, 3) общаться с менеджером
+- тестировщик может: 2) тестировать код, 3) общаться с
+  менеджером, 5) ставить задачи
+- менеджер может: 5) ставить задачи
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+2.В свою очередь они не умеют:
+- программист: 4) рисовать 5) ставить задачи
+- дизайнер: 1) писать код 2) тестировать код 5) ставить задачи
+- тестировщик: 1) писать код 4) рисовать
+- менеджер: 1) писать код 4) рисовать 2) тестировать код
+  задание:
+- нужно описать умение каждого сотрудника с помощью принципов
+  ООП;
+  - написать консольную команду средствами Laravel. В качестве
+    параметра команда должна принимать название должности.
+    Результатом работы команды должен быть список умений
+    работника. Для написания логики используйте сервисы.
+    пример запуска:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  - php artisan company: employee programmer
+  
+    на выходе должны получить подобное:
+   1) code writing
+   2) code testing
+   3) communication with manager
+- также реализовать проверку, может ли сотрудник делать
+  определенные действия. Пример для реализации:
+  команда:
+  - php artisan employee:can programmer writeCode
+  результат: true
+  команда:
+  - php artisan employee:can programmer draw
+  результат: false
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Требования:
 
-## Learning Laravel
+- php 7 и выше
+- Laravel 6, или выше
+- Использовать код стайл psr-2 https://www.php-fig.org/psr/psr-2/
+- Создать новый репозиторий на https://github.com/ и залить туда
+- Использование composer https://getcomposer.org/
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## MySQL
+1.Для заданного списка товаров получить названия всех категорий,
+в которых представлены товары.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Выборка для нескольких товаров (пример: ids = (9, 14, 6, 7, 2)).
 
-## Laravel Sponsors
+2.Для заданной категории получить список предложений всех
+товаров из этой категории. Каждая категория может иметь
+несколько подкатегорий.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Пример:
+Выбираю все товары из категории компьютеры (id = 2) и подкатегории
+(id =3 (ноутбуки), id = 4 (планшеты), id = 5 (гибриды)).
 
-### Premium Partners
+3.Для заданного списка категорий получить количество уникальных
+товаров в каждой категории.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+Выборка для нескольких категорий (пример: ids = (2, 3, 4) ).
 
-## Contributing
+4.Для заданного списка категорий получить количество единиц
+каждого товара который входит в указанные категории.
+Выборка для нескольких категорий (пример: ids = (3, 4, 5) ).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Примечание:
+Схема БД создается самостоятельно на основе выше представленных
+требований.
 
-## Code of Conduct
+В результате вы должны предоставить схему БД и SQL запросы.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Поднятия docker окружения
+1) docker-compose build
+2) docker-compose up -d
+3) docker exec -ti keyua_php-fpm_1 /bin/sh
+4) composer install
+5) php artisan migrate
+6) php artisan db:seed
 
-## Security Vulnerabilities
+## Реализация PHP:
+1) php artisan company:employee {designer || manager || programmer || tester}
+2) php artisan employee:can {designer || manager || programmer || tester} {draw || setTask || writeCode || writeTest}
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Реализация MySQL:
+1) php artisan product:get {ids}
+2) php artisan category:product {id}
+3) php artisan product:getUnique {ids}
+4) php artisan category:productsCount {ids}
+5) dump.sql

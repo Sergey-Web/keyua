@@ -14,7 +14,10 @@ class ProductSeeder extends Seeder
         $productNum = 20;
 
         for ($i = 1; $i <= $productNum; $i++) {
-            DB::table('products')->insert(['id' => $i, 'name' => 'product' . $i]);
+            DB::table('products')->insert([
+                'id' => $i,
+                'name' => 'product_' . bin2hex(random_bytes(5)) . $i
+            ]);
         }
 
     }

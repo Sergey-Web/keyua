@@ -7,41 +7,25 @@ use App\Models\Product as ProductModel;
 
 class Product extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'product:get {ids}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
+    protected $description = 'Command to get products in all nested categories by category id';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    public function handle(): void
     {
-        $product = ProductModel::find(2);
+        $products = ProductModel::query()
+            ->whereIn('id', explode(',', $this->argument('ids')))
+            ->get();
 
-        foreach($product->categories as $item) {
-            var_dump($item->name);die;
+        foreach ($products as $product) {
+            foreach ($product->categories as $category) {
+                $this->info($product->id . ' - ' . $category->name);
+            }
         }
     }
 }
