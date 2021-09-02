@@ -91,7 +91,32 @@
 
 ## Реализация MySQL:
 1) php artisan product:get {ids}
+   - select c.name
+   from categories c
+   inner join product_category pc on c.id = pc.category_id
+   where pc.product_id in (?)
+
 2) php artisan category:product {id}
+    - select
+      c.id as category_id,
+      c.name as category_name,
+      p.id as product_id,
+      p.name as product_name
+      from product_category as pc
+      inner join products as p on pc.product_id = p.id
+      inner join categories as c on pc.category_id = c.id
+      inner join categories as c2 on c.id = c2.parent
+      where category_id in (?)
 3) php artisan product:getUnique {ids}
+    - select pc.product_id,
+      p.name
+      from product_category as pc
+      inner join products as p on pc.product_id = p.id
+      where pc.category_id in (?)
+      group by pc.product_id
 4) php artisan category:productsCount {ids}
+    - select count(*) as count, product_id
+      from product_category pc
+      where category_id in (?)
+      group by product_id
 5) dump.sql

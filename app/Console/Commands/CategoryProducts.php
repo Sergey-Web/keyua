@@ -36,8 +36,7 @@ class CategoryProducts extends Command
             ];
         }
 
-        foreach ($categoryProducts as $categoryId => $products) {
-            $this->warn($categoryId . ':');
+        foreach ($categoryProducts as $products) {
             foreach ($products as $product) {
                 $this->info('id:' . $product['product_id'] . ' (' . $product['count'] . ')');
             }
